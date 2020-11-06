@@ -10,8 +10,7 @@ public class MucDichTap {
     public MucDichTap() {
     }
 
-    public MucDichTap(long id, String title, int thoiGianTap, long thoiGianNghi) {
-        this.id = id;
+    public MucDichTap( String title, int thoiGianTap, long thoiGianNghi) {
         this.title = title;
         this.thoiGianTap = thoiGianTap;
         this.thoiGianNghi = thoiGianNghi;
