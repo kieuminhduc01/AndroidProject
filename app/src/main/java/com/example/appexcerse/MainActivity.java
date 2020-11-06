@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.appexcerse.area.Client.chucNang.FragmentClientExercise;
-import com.example.appexcerse.area.Client.chucNang.FragmentClientPersonalInformation;
+import com.example.appexcerse.area.Client.chucNang.Excercise.FragmentClientExercise;
+import com.example.appexcerse.area.Client.chucNang.PersonalInformation.FragmentClientPersonalInformation;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

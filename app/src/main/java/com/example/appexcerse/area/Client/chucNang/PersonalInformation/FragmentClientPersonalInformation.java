@@ -1,4 +1,4 @@
-package com.example.appexcerse.area.Client.chucNang;
+package com.example.appexcerse.area.Client.chucNang.PersonalInformation;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
