@@ -5,7 +5,7 @@ public class CustomerContact {
     private String email;
     private String phoneNumber;
     private String name;
-    private String dev;
+    private String Dev_duckm;
 
     public CustomerContact(String email, String phoneNumber, String name) {
         this.email = email;
