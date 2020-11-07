@@ -9,19 +9,13 @@ import java.util.List;
 public class ListMuscleFocus {
     public static List<String> getAll(){
         List<String> muscles=new ArrayList<>();
+        muscles.add(MuscleFocus.Chest);
         muscles.add(MuscleFocus.Abs);
         muscles.add(MuscleFocus.Back);
-        muscles.add(MuscleFocus.Biceps);
-        muscles.add(MuscleFocus.Calves);
-        muscles.add(MuscleFocus.Chest);
-        muscles.add(MuscleFocus.Deltoid);
-        muscles.add(MuscleFocus.ForceArms);
-        muscles.add(MuscleFocus.Glutes);
-        muscles.add(MuscleFocus.Lats);
-        muscles.add(MuscleFocus.Quads);
-        muscles.add(MuscleFocus.Triceps);
-        muscles.add(MuscleFocus.Hams);
-
+        muscles.add(MuscleFocus.Arms);
+        muscles.add(MuscleFocus.Legs);
+        muscles.add(MuscleFocus.FullBody);
+       
         return muscles;
     }
 }
