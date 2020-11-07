@@ -8,8 +8,9 @@
     "\\app\\src\\main\\java\\com",
     "\\app\\src\\main\\java\\com\\example",
     "\\app\\src\\main\\java\\com\\example\\appexcerse",
-    "\\app\\src\\main\\java\\com\\example\\appexcerse\\model"
+    "\\app\\src\\main\\java\\com\\example\\appexcerse\\constant",
+    "\\app\\src\\main\\java\\com\\example\\appexcerse\\constant\\model"
   ],
-  "SelectedNode": "\\app\\src\\main\\java\\com\\example\\appexcerse\\model\\CustomerContact.java",
+  "SelectedNode": "\\app\\src\\main\\java\\com\\example\\appexcerse\\constant\\listModel\\ListMuscleFocus.java",
   "PreviewInSolutionExplorer": false
 }
