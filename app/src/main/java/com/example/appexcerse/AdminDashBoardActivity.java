@@ -1,8 +1,10 @@
 package com.example.appexcerse;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AdminDashBoardActivity extends AppCompatActivity {
 
@@ -10,6 +12,23 @@ public class AdminDashBoardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
+    }
+
+    public void loadExerciseActivity(View v) {
+        System.out.println("this is Exercise");
+    }
+
+    public void loadOrderActivity(View v) {
+        System.out.println("this is Order");
+    }
+
+    public void loadProductActivity(View v) {
+        System.out.println("this is Product");
+    }
+
+    public void loadUserActivity(View v) {
+        Intent intent = new Intent(this,UserManagerActivity.class);
+        startActivity(intent);
     }
 
 }

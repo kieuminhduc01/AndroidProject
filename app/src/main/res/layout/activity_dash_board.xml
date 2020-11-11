@@ -22,7 +22,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My Dashboard"
+                android:text="Admin Dashboard"
                 android:textColor="#000000"
                 android:textSize="22sp" />
 
@@ -45,7 +45,10 @@
                 android:layout_columnWeight="1"
                 android:layout_margin="12dp"
                 android:elevation="6dp"
-                app:cardCornerRadius="12dp">
+                app:cardCornerRadius="12dp"
+                android:clickable="true"
+                android:onClick="loadExerciseActivity"
+                >
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -63,7 +66,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hello"
+                        android:text="Excercise"
                         android:textColor="#000000"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -84,19 +87,22 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    android:clickable="true"
+                    android:onClick="loadOrderActivity">
 
                     <ImageView
+                        android:layout_marginLeft="15dp"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:src="@drawable/admin_order_icon" />
 
                     <TextView
+                        android:layout_marginLeft="27dp"
                         android:layout_marginTop="5dp"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hello"
+                        android:text="Order"
                         android:textColor="#000000"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -110,7 +116,10 @@
                 android:layout_columnWeight="1"
                 android:layout_margin="12dp"
                 android:elevation="6dp"
-                app:cardCornerRadius="12dp">
+                app:cardCornerRadius="12dp"
+                android:clickable="true"
+                android:onClick="loadProductActivity">
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -130,7 +139,7 @@
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hello"
+                        android:text="Product"
                         android:textColor="#000000"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -151,7 +160,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    android:clickable="true"
+                    android:onClick="loadUserActivity"
+                    >
 
                     <ImageView
                         android:layout_width="80dp"
@@ -160,10 +172,9 @@
 
                     <TextView
                         android:layout_marginTop="5dp"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hello"
+                        android:text="Users"
                         android:textColor="#000000"
                         android:textSize="18sp" />
                 </LinearLayout>
