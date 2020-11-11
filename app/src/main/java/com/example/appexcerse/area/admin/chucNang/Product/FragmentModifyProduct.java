@@ -1,4 +1,4 @@
-package com.example.appexcerse.area.admin.chucNang.Food;
+package com.example.appexcerse.area.admin.chucNang.Product;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import com.example.appexcerse.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FragmentListProduct#newInstance} factory method to
+ * Use the {@link FragmentModifyProduct#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentListProduct extends Fragment {
+public class FragmentModifyProduct extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class FragmentListProduct extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public FragmentListProduct() {
+    public FragmentModifyProduct() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class FragmentListProduct extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentListProduct.
+     * @return A new instance of fragment FragmentModifyProduct.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentListProduct newInstance(String param1, String param2) {
-        FragmentListProduct fragment = new FragmentListProduct();
+    public static FragmentModifyProduct newInstance(String param1, String param2) {
+        FragmentModifyProduct fragment = new FragmentModifyProduct();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class FragmentListProduct extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_product, container, false);
+        return inflater.inflate(R.layout.fragment_modify_product, container, false);
     }
 }
