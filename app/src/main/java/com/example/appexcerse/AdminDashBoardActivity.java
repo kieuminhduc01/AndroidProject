@@ -23,7 +23,8 @@ public class AdminDashBoardActivity extends AppCompatActivity {
     }
 
     public void loadProductActivity(View v) {
-        System.out.println("this is Product");
+        Intent intent = new Intent(this,ProductManagementActivity.class);
+        startActivity(intent);
     }
 
     public void loadUserActivity(View v) {

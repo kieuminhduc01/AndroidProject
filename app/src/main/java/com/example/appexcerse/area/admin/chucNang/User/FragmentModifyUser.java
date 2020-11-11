@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.appexcerse.R;
 import com.example.appexcerse.constant.listModel.ListRole;
+import com.example.appexcerse.dao.UserDAO;
 import com.example.appexcerse.model.User;
 
 /**
@@ -97,7 +98,9 @@ public class FragmentModifyUser extends Fragment {
             @Override
             public void onClick(View v) {
 
-                System.out.println(spinnerRole.getSelectedItem().toString());
+              user.setRole(spinnerRole.getSelectedItem().toString());
+              new UserDAO().updateUser(user);
+
             }
         });
     }

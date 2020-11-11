@@ -5,7 +5,7 @@ public class Exercise {
     private String name;
     private float caloriesPerRep;
     private String muscleFocus;
-    private MucDichTap mucDichTap;
+    private String mucDichTap;
     private String equipment;
     private String level;
     private String typeOfExercise;
@@ -15,7 +15,7 @@ public class Exercise {
     public Exercise() {
     }
 
-    public Exercise(String name, float caloriesPerRep, String muscleFocus, MucDichTap mucDichTap, String equipment, String level, String typeOfExercise, String videoUrl, String imgUrl) {
+    public Exercise(String name, float caloriesPerRep, String muscleFocus, String mucDichTap, String equipment, String level, String typeOfExercise, String videoUrl, String imgUrl) {
         this.name = name;
         this.caloriesPerRep = caloriesPerRep;
         this.muscleFocus = muscleFocus;
@@ -59,11 +59,11 @@ public class Exercise {
         this.muscleFocus = muscleFocus;
     }
 
-    public MucDichTap getMucDichTap() {
+    public String getMucDichTap() {
         return mucDichTap;
     }
 
-    public void setMucDichTap(MucDichTap mucDichTap) {
+    public void setMucDichTap(String mucDichTap) {
         this.mucDichTap = mucDichTap;
     }
 

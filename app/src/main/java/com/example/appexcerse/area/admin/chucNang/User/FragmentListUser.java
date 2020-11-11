@@ -21,6 +21,11 @@ import com.example.appexcerse.UserManagerActivity;
 import com.example.appexcerse.adapter.UserAdapter;
 import com.example.appexcerse.constant.model.RoleUser;
 import com.example.appexcerse.model.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,52 +96,36 @@ public class FragmentListUser extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        userList =  new ArrayList<>();
-        userList.add(new User("Datnvhe130670","Nguyendat99", RoleUser.Admin));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
-        userList.add(new User("danhn","Nguyendat99",RoleUser.Customer));
         listView = view.findViewById(R.id.listView);
-        adapter = new UserAdapter(getActivity(),R.layout.customlistview_admin_user_list,userList);
-        listView.setAdapter(adapter);
-        Activity currentActivity =  getActivity();
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference().child("User");
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                FragmentModifyUser fragmentModifyUser = new FragmentModifyUser(userList.get(position));
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frameLayout, fragmentModifyUser)
-                        .commit();
-                transaction.addToBackStack(null);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userList = new ArrayList<>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    userList.add(snapshot.getValue(User.class));
+                }
+
+                adapter = new UserAdapter(getActivity(),R.layout.customlistview_admin_user_list,userList);
+                listView.setAdapter(adapter);
+                Activity currentActivity =  getActivity();
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        FragmentModifyUser fragmentModifyUser = new FragmentModifyUser(userList.get(position));
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        transaction.replace(R.id.frameLayout, fragmentModifyUser)
+                                .commit();
+                        transaction.addToBackStack(null);
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
             }
         });
     }

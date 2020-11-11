@@ -32,17 +32,5 @@ public class UserManagerActivity extends AppCompatActivity {
 
     }
 
-    public void replaceFragments(Class fragmentClass) {
-        Fragment fragment = null;
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.frameLayout, fragment)
-                .commit();
-        
-    }
+
 }

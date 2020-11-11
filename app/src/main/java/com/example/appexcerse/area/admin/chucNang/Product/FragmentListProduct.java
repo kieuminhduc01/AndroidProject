@@ -1,14 +1,33 @@
 package com.example.appexcerse.area.admin.chucNang.Product;
 
+import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.example.appexcerse.R;
+import com.example.appexcerse.adapter.ProductAdapter;
+import com.example.appexcerse.adapter.UserAdapter;
+import com.example.appexcerse.area.admin.chucNang.User.FragmentModifyUser;
+import com.example.appexcerse.model.Product;
+import com.example.appexcerse.model.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +44,9 @@ public class FragmentListProduct extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private ProductAdapter adapter;
+    private ListView listView;
+    private List<Product> productList;
     public FragmentListProduct() {
         // Required empty public constructor
     }
@@ -62,5 +83,37 @@ public class FragmentListProduct extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_list_product, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        listView = view.findViewById(R.id.listView);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference().child("Product");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                productList = new ArrayList<>();
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    productList.add(data.getValue(Product.class));
+                }
+
+                adapter = new ProductAdapter(getActivity(),R.layout.customlistview_admin_user_list,productList);
+                listView.setAdapter(adapter);
+                Activity currentActivity =  getActivity();
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
