@@ -120,4 +120,5 @@ public class FragmentListProduct extends Fragment {
             }
         });
     }
+
 }

@@ -118,14 +118,11 @@ public class FragmentModifyProduct extends Fragment {
         txtCostOfGoodsSold.setText(String.valueOf(curentProduct.getCostOfGoodSold()));
         txtSalePrice.setText(String.valueOf(curentProduct.getSalePrice()));
         txtDescription.setText(curentProduct.getDescriptionl());
-
         Glide.with(view).load(curentProduct.getImgUrl()).into(productImg);
 
         productImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("ahihi");
-                System.out.println(curentProduct.getQuantiy());
                 choosePicture();
             }
         });
@@ -151,7 +148,6 @@ public class FragmentModifyProduct extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
             imageUri = data.getData();
-
             uploadPicture();
         }
     }
@@ -169,15 +165,11 @@ public class FragmentModifyProduct extends Fragment {
                         imgUrl.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-
                                 curentProduct.setImgUrl(uri.toString());
                                 productImg.setImageURI(imageUri);
                             }
                         });
-
-
                         Toast.makeText(getContext(),"Uploaded",Toast.LENGTH_SHORT).show();
-
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

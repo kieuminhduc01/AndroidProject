@@ -1,8 +1,8 @@
 package com.example.appexcerse.model;
 
 public class Product {
-    private long id;
-    private long categoryId;
+    private String id;
+
     private String name;
     private float costOfGoodSold;
     private float salePrice;
@@ -13,8 +13,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(long categoryId, String name, float costOfGoodSold, float salePrice, String imgUrl, String descriptionl, int quantiy) {
-        this.categoryId = categoryId;
+    public Product(String name, float costOfGoodSold, float salePrice, String imgUrl, String descriptionl, int quantiy) {
         this.name = name;
         this.costOfGoodSold = costOfGoodSold;
         this.salePrice = salePrice;
@@ -23,20 +22,12 @@ public class Product {
         this.quantiy = quantiy;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(long categoryId) {
-        this.categoryId = categoryId;
     }
 
     public String getName() {
