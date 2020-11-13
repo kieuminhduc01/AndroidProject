@@ -126,6 +126,13 @@ public class FragmentModifyProduct extends Fragment {
                 choosePicture();
             }
         });
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new ProductDAO().delete(curentProduct.getId());
+                getFragmentManager().popBackStack();
+            }
+        });
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override

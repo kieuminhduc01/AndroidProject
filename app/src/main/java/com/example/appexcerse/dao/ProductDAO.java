@@ -20,8 +20,12 @@ public class ProductDAO {
         database.getReference().child(path).updateChildren(hashMap);
     }
     public void insert (Product product){
-
-        database.getReference().child(path).push().setValue(product);
+        HashMap hashMap = new HashMap();
+        hashMap.put(String.valueOf(product.getId()),product);
+        database.getReference().child(path).updateChildren(hashMap);
+    }
+    public void delete (String id){
+        database.getReference().child(path).child(id).removeValue();
     }
 
 }
