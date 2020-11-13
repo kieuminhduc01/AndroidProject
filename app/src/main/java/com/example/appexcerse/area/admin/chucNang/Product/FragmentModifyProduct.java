@@ -1,14 +1,33 @@
 package com.example.appexcerse.area.admin.chucNang.Product;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
 import com.example.appexcerse.R;
+import com.example.appexcerse.dao.ProductDAO;
+import com.example.appexcerse.model.Product;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.UUID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,10 +44,27 @@ public class FragmentModifyProduct extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Product curentProduct;
+    private ImageView productImg;
+    private EditText txtName;
+    private EditText txtCostOfGoodsSold;
+    private EditText txtSalePrice;
+    private EditText txtQuantity;
+    private EditText txtDescription;
+    private Button btnUpdate;
+    private Button btnDelete;
+    private Uri imageUri;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
 
     public FragmentModifyProduct() {
         // Required empty public constructor
     }
+
+    public FragmentModifyProduct(Product product) {
+        curentProduct = product;
+    }
+
 
     /**
      * Use this factory method to create a new instance of
@@ -62,5 +98,93 @@ public class FragmentModifyProduct extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_modify_product, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+        productImg = view.findViewById(R.id.productImg);
+        txtName = view.findViewById(R.id.txtName);
+        txtDescription = view.findViewById(R.id.txtDescription);
+        txtCostOfGoodsSold = view.findViewById(R.id.txtCostOfGoodsSold);
+        txtSalePrice = view.findViewById(R.id.txtSalePrice);
+        txtQuantity = view.findViewById(R.id.txtQuantity);
+        btnDelete = view.findViewById(R.id.btnDelete);
+        btnUpdate = view.findViewById(R.id.btnUpdate);
+
+        txtName.setText(curentProduct.getName());
+        txtCostOfGoodsSold.setText(String.valueOf(curentProduct.getCostOfGoodSold()));
+        txtSalePrice.setText(String.valueOf(curentProduct.getSalePrice()));
+        txtDescription.setText(curentProduct.getDescriptionl());
+
+        Glide.with(view).load(curentProduct.getImgUrl()).into(productImg);
+
+        productImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("ahihi");
+                System.out.println(curentProduct.getQuantiy());
+                choosePicture();
+            }
+        });
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+    new ProductDAO().update(curentProduct);
+            }
+        });
+    }
+
+
+    private void choosePicture() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+            imageUri = data.getData();
+
+            uploadPicture();
+        }
+    }
+
+    private void uploadPicture() {
+
+  final String randomKey = UUID.randomUUID().toString();
+        final StorageReference imgUrl = storageReference.child("Image/Product/" + randomKey+".jpg");
+
+        imgUrl.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // Get a URL to the uploaded content
+                        imgUrl.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+
+                                curentProduct.setImgUrl(uri.toString());
+                                productImg.setImageURI(imageUri);
+                            }
+                        });
+
+
+                        Toast.makeText(getContext(),"Uploaded",Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Toast.makeText(getContext(),"Failed",Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

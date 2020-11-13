@@ -105,7 +105,11 @@ public class FragmentListProduct extends Fragment {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                        FragmentModifyProduct fragmentModifyProduct = new FragmentModifyProduct(productList.get(position));
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        transaction.replace(R.id.frameLayout, fragmentModifyProduct)
+                                .commit();
+                        transaction.addToBackStack(null);
                     }
                 });
             }
