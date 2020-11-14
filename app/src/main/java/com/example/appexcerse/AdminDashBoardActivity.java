@@ -31,7 +31,8 @@ public class AdminDashBoardActivity extends AppCompatActivity {
     }
 
     public void loadOrderActivity(View v) {
-        System.out.println("this is Order");
+        Intent intent = new Intent(this,OrderManagementActivity.class);
+        startActivity(intent);
     }
 
     public void loadProductActivity(View v) {

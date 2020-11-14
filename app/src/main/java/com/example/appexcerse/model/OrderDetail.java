@@ -11,6 +11,9 @@ public class OrderDetail {
         this.quantity = quantity;
     }
 
+    public OrderDetail() {
+    }
+
     public String getId() {
         return id;
     }

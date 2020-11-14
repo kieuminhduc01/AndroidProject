@@ -56,6 +56,10 @@ public class Util {
         SimpleDateFormat ISO_8601_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:sss'Z'");
         String now = ISO_8601_FORMAT.format(new Date());
         return now;
+    } public static String dateToHumanReadableString(Date date){
+        SimpleDateFormat vnFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String now = vnFormat.format(date);
+        return now;
     }
     public static Date ParseISO_8601_FORMATToDate(String string){
         SimpleDateFormat ISO_8601_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:sss'Z'");
@@ -66,6 +70,8 @@ public class Util {
         }
         return new Date();
     }
+
+
 
 
 }
