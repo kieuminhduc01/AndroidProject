@@ -15,7 +15,8 @@ public class AdminDashBoardActivity extends AppCompatActivity {
     }
 
     public void loadExerciseActivity(View v) {
-        System.out.println("this is Exercise");
+        Intent intent = new Intent(this,ExerciseManagementActivity.class);
+        startActivity(intent);
     }
 
     public void loadOrderActivity(View v) {

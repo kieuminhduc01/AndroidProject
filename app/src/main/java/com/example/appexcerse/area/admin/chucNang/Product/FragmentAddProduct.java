@@ -104,7 +104,7 @@ public class FragmentAddProduct extends Fragment {
         txtCostOfGoodsSold = view.findViewById(R.id.txtCostOfGoodsSold);
         txtSalePrice = view.findViewById(R.id.txtSalePrice);
         txtQuantity = view.findViewById(R.id.txtQuantity);
-        btnInsert = view.findViewById(R.id.btnInsert);
+        btnInsert = view.findViewById(R.id.btnUpdate);
 
         productImg.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,14 +1,44 @@
 package com.example.appexcerse.area.admin.chucNang.Excercise;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.appexcerse.R;
+import com.example.appexcerse.area.admin.logicUtil.Util;
+import com.example.appexcerse.constant.listModel.ListLevel;
+import com.example.appexcerse.constant.listModel.ListMucDichTap;
+import com.example.appexcerse.constant.listModel.ListMuscleFocus;
+import com.example.appexcerse.constant.listModel.ListTypeOfExcercise;
+import com.example.appexcerse.dao.ExerciseDAO;
+import com.example.appexcerse.model.Exercise;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipDrawable;
+import com.google.android.material.chip.ChipGroup;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +55,22 @@ public class FragmentAddExercise extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    Exercise exercise = new Exercise();
+    private ChipGroup chipMucDichTap;
+    private ChipGroup chipForcusMucle;
+    private ChipGroup chipTypeOfExcercise;
+    private Button btnInsert;
+    private EditText txtName;
+    private EditText txtEquipment;
+    private ImageView imgExercise;
+    private TextView txtVideoUrl;
+    private TextView txtCaloriesPerRep;
+    private Spinner spinnerLevel;
+    private Uri imageUri;
+    private Uri videoUri;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
+
 
     public FragmentAddExercise() {
         // Required empty public constructor
@@ -63,4 +109,142 @@ public class FragmentAddExercise extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_exercise, container, false);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        chipMucDichTap = view.findViewById(R.id.chipMucdichtap);
+        chipForcusMucle = view.findViewById(R.id.chipMucles);
+        chipTypeOfExcercise = view.findViewById(R.id.chipTypeOfExcercise);
+        btnInsert = view.findViewById(R.id.btnUpdate);
+        imgExercise = view.findViewById(R.id.imgExercise);
+        spinnerLevel = view.findViewById(R.id.spinnerLevel);
+        txtEquipment = view.findViewById(R.id.txtEquipment);
+        txtCaloriesPerRep = view.findViewById(R.id.txtCalories);
+        txtVideoUrl = view.findViewById(R.id.txtVideoUrl);
+        txtName = view.findViewById(R.id.txtName);
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+//Load data
+        Util.loadChip(chipMucDichTap, ListMucDichTap.getAll(), view.getContext() , null);
+        Util.  loadChip(chipForcusMucle, ListMuscleFocus.getAll(), view.getContext(),null);
+        Util. loadChip(chipTypeOfExcercise, ListTypeOfExcercise.getAll(), view.getContext(),null);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, ListLevel.getAll());
+        spinnerLevel.setAdapter(spinnerAdapter);
+        //Event
+        btnInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+    exercise.setName(txtName.getText().toString());
+    exercise.setMuscleFocus(Util.conectListString(Util.selectedChips(chipForcusMucle),","));
+    exercise.setMucDichTap(Util.conectListString(Util.selectedChips(chipMucDichTap),","));
+    exercise.setEquipment(txtEquipment.getText().toString());
+    exercise.setCaloriesPerRep(Float.valueOf(txtCaloriesPerRep.getText().toString()));
+    exercise.setLevel(spinnerLevel.getSelectedItem().toString());
+    exercise.setTypeOfExercise(Util.conectListString(Util.selectedChips(chipTypeOfExcercise),","));
+    exercise.setId(UUID.randomUUID().toString());
+    new ExerciseDAO().insert(exercise);
+
+            }
+        });
+
+        imgExercise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              choosePicture();
+            }
+        });
+
+        txtVideoUrl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               chooseVideo();
+            }
+        });
+
+    }
+
+    private void choosePicture() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 1);
+    }
+
+    private void chooseVideo() {
+        Intent intent = new Intent();
+        intent.setType("video/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 2);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+            imageUri = data.getData();
+            uploadPicture();
+        } else if (requestCode == 2 && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+            videoUri = data.getData();
+            uploadVideo();
+        }
+    }
+
+    private void uploadPicture() {
+        final String randomKey = UUID.randomUUID().toString();
+        final StorageReference imgUrl = storageReference.child("/Image/Exercise/" + randomKey+".jpg");
+        imgUrl.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // Get a URL to the uploaded content
+                        imgUrl.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+
+                                imgExercise.setImageURI(imageUri);
+                                exercise.setImgUrl(uri.toString());
+                            }
+                        });
+                        Toast.makeText(getContext(),"Uploaded",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Toast.makeText(getContext(),"Failed",Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void uploadVideo() {
+        final String randomKey = UUID.randomUUID().toString();
+        final StorageReference imgUrl = storageReference.child("Video/" + randomKey);
+
+        imgUrl.putFile(videoUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // Get a URL to the uploaded content
+                        imgUrl.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                               txtVideoUrl.setText("Click here to change video");
+                               exercise.setVideoUrl(uri.toString());
+                            }
+                        });
+                        Toast.makeText(getContext(),"Uploaded",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Toast.makeText(getContext(),"Failed",Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+
+
+
 }
