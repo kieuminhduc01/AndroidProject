@@ -3,23 +3,19 @@ package com.example.appexcerse.area.admin.chucNang.User;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.appexcerse.R;
-import com.example.appexcerse.UserManagerActivity;
 import com.example.appexcerse.adapter.UserAdapter;
-import com.example.appexcerse.constant.model.RoleUser;
 import com.example.appexcerse.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -107,9 +103,9 @@ public class FragmentListUser extends Fragment {
                     userList.add(snapshot.getValue(User.class));
                 }
 
-                adapter = new UserAdapter(getActivity(),R.layout.customlistview_admin_user_list,userList);
+                adapter = new UserAdapter(getActivity(), R.layout.customlistview_admin_user_list, userList);
                 listView.setAdapter(adapter);
-                Activity currentActivity =  getActivity();
+                Activity currentActivity = getActivity();
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

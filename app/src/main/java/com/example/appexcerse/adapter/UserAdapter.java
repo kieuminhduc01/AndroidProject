@@ -41,14 +41,14 @@ public class UserAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView textUsername;
         TextView textRole;
-        if(convertView == null){
-        convertView =    activity.getLayoutInflater().inflate(R.layout.customlistview_admin_user_list,null);
-        textUsername = convertView.findViewById(R.id.txt3);
-        textRole = convertView.findViewById(R.id.txtRole);
-        convertView.setTag(R.id.txt3,textUsername);
-        convertView.setTag(R.id.txtRole,textRole);
+        if (convertView == null) {
+            convertView = activity.getLayoutInflater().inflate(R.layout.customlistview_admin_user_list, null);
+            textUsername = convertView.findViewById(R.id.txt3);
+            textRole = convertView.findViewById(R.id.txtRole);
+            convertView.setTag(R.id.txt3, textUsername);
+            convertView.setTag(R.id.txtRole, textRole);
 
-        }else{
+        } else {
             textUsername = (TextView) convertView.getTag(R.id.txt3);
             textRole = (TextView) convertView.getTag(R.id.txtRole);
         }
