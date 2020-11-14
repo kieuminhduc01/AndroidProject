@@ -99,7 +99,7 @@ public class FragmentModifyUser extends Fragment {
             public void onClick(View v) {
 
               user.setRole(spinnerRole.getSelectedItem().toString());
-              new UserDAO().updateUser(user);
+              new UserDAO().push(user);
 
             }
         });

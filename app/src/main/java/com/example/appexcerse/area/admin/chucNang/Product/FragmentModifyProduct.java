@@ -137,7 +137,7 @@ public class FragmentModifyProduct extends Fragment {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-    new ProductDAO().update(curentProduct);
+    new ProductDAO().push(curentProduct);
             }
         });
     }

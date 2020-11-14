@@ -7,8 +7,11 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class Util {
@@ -22,7 +25,6 @@ public class Util {
         }
         return result.toString();
     }
-
     public static List<String> selectedChips(ChipGroup chipGroup) {
         List<String> selectedItem = new ArrayList<>();
         for (int i = 0; i < chipGroup.getChildCount(); i++) {
@@ -33,7 +35,6 @@ public class Util {
         }
         return selectedItem;
     }
-
     public static List<String> reverseStringToList(String base, String character) {
         String[] string = base.split(character);
         return Arrays.asList(string);
@@ -50,6 +51,20 @@ public class Util {
             chip.setChecked(selectedList.indexOf(element) >= 0);
             chipGroup.addView(chip);
         }
+    }
+    public static String getNow(){
+        SimpleDateFormat ISO_8601_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:sss'Z'");
+        String now = ISO_8601_FORMAT.format(new Date());
+        return now;
+    }
+    public static Date ParseISO_8601_FORMATToDate(String string){
+        SimpleDateFormat ISO_8601_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:sss'Z'");
+        try {
+            return ISO_8601_FORMAT.parse(string);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return new Date();
     }
 
 

@@ -23,7 +23,7 @@ public class UserDAO {
     }
 
 
-    public void updateUser(User user){
+    public void push(User user){
         HashMap hashMap = new HashMap();
         hashMap.put(String.valueOf(user.getId()),user);
         database.getReference().child(path).updateChildren(hashMap);

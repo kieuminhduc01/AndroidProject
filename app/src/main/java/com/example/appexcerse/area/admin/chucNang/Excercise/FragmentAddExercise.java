@@ -143,7 +143,7 @@ public class FragmentAddExercise extends Fragment {
     exercise.setLevel(spinnerLevel.getSelectedItem().toString());
     exercise.setTypeOfExercise(Util.conectListString(Util.selectedChips(chipTypeOfExcercise),","));
     exercise.setId(UUID.randomUUID().toString());
-    new ExerciseDAO().insert(exercise);
+    new ExerciseDAO().push(exercise);
 
             }
         });

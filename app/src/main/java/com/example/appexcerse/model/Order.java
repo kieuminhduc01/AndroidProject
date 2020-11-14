@@ -1,22 +1,16 @@
 package com.example.appexcerse.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
     private String id;
     private String customerId;
-    private Date createdDate;
+    private String createdDate;
     private Double totalAmount;
     private String Status;
-    private Date DeliveredDate;
-
-    public Order(String customerId, Date createdDate, Double totalAmount, String status, Date deliveredDate) {
-        this.customerId = customerId;
-        this.createdDate = createdDate;
-        this.totalAmount = totalAmount;
-        Status = status;
-        DeliveredDate = deliveredDate;
-    }
+    private String DeliveredDate;
+    private List<OrderDetail> items;
 
     public Order() {
     }
@@ -37,11 +31,11 @@ public class Order {
         this.customerId = customerId;
     }
 
-    public Date getCreatedDate() {
+    public String getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -61,11 +55,28 @@ public class Order {
         Status = status;
     }
 
-    public Date getDeliveredDate() {
+    public String getDeliveredDate() {
         return DeliveredDate;
     }
 
-    public void setDeliveredDate(Date deliveredDate) {
+    public void setDeliveredDate(String deliveredDate) {
         DeliveredDate = deliveredDate;
+    }
+
+    public List<OrderDetail> getItems() {
+        return items;
+    }
+
+    public void setItems(List<OrderDetail> items) {
+        this.items = items;
+    }
+
+    public Order(String customerId, String createdDate, Double totalAmount, String status, String deliveredDate, List<OrderDetail> items) {
+        this.customerId = customerId;
+        this.createdDate = createdDate;
+        this.totalAmount = totalAmount;
+        Status = status;
+        DeliveredDate = deliveredDate;
+        this.items = items;
     }
 }

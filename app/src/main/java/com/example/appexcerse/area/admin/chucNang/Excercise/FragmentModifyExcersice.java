@@ -160,7 +160,7 @@ public class FragmentModifyExcersice extends Fragment {
                 currentExercise.setCaloriesPerRep(Float.valueOf(txtCaloriesPerRep.getText().toString()));
                 currentExercise.setLevel(spinnerLevel.getSelectedItem().toString());
                 currentExercise.setTypeOfExercise(Util.conectListString(Util.selectedChips(chipTypeOfExcercise), ","));
-                new ExerciseDAO().update(currentExercise);
+                new ExerciseDAO().push(currentExercise);
             }
         });
 

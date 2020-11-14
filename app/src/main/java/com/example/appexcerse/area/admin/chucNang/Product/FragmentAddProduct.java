@@ -123,7 +123,7 @@ public class FragmentAddProduct extends Fragment {
                 curentProduct.setQuantiy(Integer.valueOf(txtQuantity.getText().toString()));
                 curentProduct.setId(UUID.randomUUID().toString());
 
-                new ProductDAO().insert(curentProduct);
+                new ProductDAO().push(curentProduct);
             }
         });
 

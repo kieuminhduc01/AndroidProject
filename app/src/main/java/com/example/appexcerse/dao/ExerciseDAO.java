@@ -20,13 +20,7 @@ public class ExerciseDAO {
         return exerciseList;
     }
 
-    public void insert(Exercise exercise) {
-        HashMap hashMap = new HashMap();
-        hashMap.put(String.valueOf(exercise.getId()), exercise);
-        database.getReference().child(path).updateChildren(hashMap);
-    }
-
-    public void update(Exercise exercise) {
+    public void push(Exercise exercise) {
         HashMap hashMap = new HashMap();
         hashMap.put(String.valueOf(exercise.getId()), exercise);
         database.getReference().child(path).updateChildren(hashMap);
