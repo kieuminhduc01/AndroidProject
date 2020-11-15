@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,10 +21,10 @@ import com.example.appexcerse.dao.ProductDAO;
 import com.example.appexcerse.model.Product;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.UUID;
 
@@ -53,6 +52,7 @@ public class FragmentModifyProduct extends Fragment {
     private EditText txtDescription;
     private Button btnUpdate;
     private Button btnDelete;
+    private Button btnUploadImage;
     private Uri imageUri;
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -111,16 +111,18 @@ public class FragmentModifyProduct extends Fragment {
         txtCostOfGoodsSold = view.findViewById(R.id.txtCostOfGoodsSold);
         txtSalePrice = view.findViewById(R.id.txtSalePrice);
         txtQuantity = view.findViewById(R.id.txtQuantity);
-        btnDelete = view.findViewById(R.id.btnDelete);
+        btnDelete = view.findViewById(R.id.btnAdd);
         btnUpdate = view.findViewById(R.id.btnUpdate);
+        btnUploadImage = view.findViewById(R.id.btnAdd);
 
         txtName.setText(curentProduct.getName());
         txtCostOfGoodsSold.setText(String.valueOf(curentProduct.getCostOfGoodSold()));
         txtSalePrice.setText(String.valueOf(curentProduct.getSalePrice()));
         txtDescription.setText(curentProduct.getDescriptionl());
         Glide.with(view).load(curentProduct.getImgUrl()).into(productImg);
+        txtQuantity.setText(String.valueOf(curentProduct.getQuantiy()));
 
-        productImg.setOnClickListener(new View.OnClickListener() {
+        btnUploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 choosePicture();
@@ -137,7 +139,7 @@ public class FragmentModifyProduct extends Fragment {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-    new ProductDAO().push(curentProduct);
+                new ProductDAO().push(curentProduct);
             }
         });
     }
@@ -161,8 +163,8 @@ public class FragmentModifyProduct extends Fragment {
 
     private void uploadPicture() {
 
-  final String randomKey = UUID.randomUUID().toString();
-        final StorageReference imgUrl = storageReference.child("Image/Product/" + randomKey+".jpg");
+        final String randomKey = UUID.randomUUID().toString();
+        final StorageReference imgUrl = storageReference.child("Image/Product/" + randomKey + ".jpg");
 
         imgUrl.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -176,19 +178,16 @@ public class FragmentModifyProduct extends Fragment {
                                 productImg.setImageURI(imageUri);
                             }
                         });
-                        Toast.makeText(getContext(),"Uploaded",Toast.LENGTH_SHORT).show();
+                        FancyToast.makeText(getContext(),"Upload Successful",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,true).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
-                        Toast.makeText(getContext(),"Failed",Toast.LENGTH_SHORT).show();
+                        FancyToast.makeText(getContext(),"Failed",FancyToast.LENGTH_SHORT,FancyToast.ERROR,true).show();
                     }
                 });
     }
-
-
-
 
 
 }

@@ -1,6 +1,7 @@
 package com.example.appexcerse.adapter;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.appexcerse.R;
 import com.example.appexcerse.area.admin.logicUtil.Util;
+import com.example.appexcerse.constant.model.OrderStatus;
 import com.example.appexcerse.model.Exercise;
 import com.example.appexcerse.model.Order;
 
@@ -63,6 +65,7 @@ public class OrderAdapter extends BaseAdapter {
             txtTotalAmount = (TextView) convertView.getTag(R.id.txtTotalAmount);
             txtCreatedDate = (TextView) convertView.getTag(R.id.txtCreatedDate);
             txtStatus = (TextView) convertView.getTag(R.id.txtStatus);
+
         }
 
         Order order = orderList.get(position);
@@ -70,6 +73,15 @@ public class OrderAdapter extends BaseAdapter {
         txtCreatedDate.setText(Util.dateToHumanReadableString(Util.ParseISO_8601_FORMATToDate(order.getCreatedDate())));
         txtStatus.setText(order.getStatus());
         txtTotalAmount.setText(String.valueOf(order.getTotalAmount()));
+        txtStatus.setTextColor(getStatusColor(order.getStatus()));
         return convertView;
+    }
+
+    private int getStatusColor(String status) {
+
+        if (status.equalsIgnoreCase(OrderStatus.Complete)) return Color.GREEN;
+        if (status.equalsIgnoreCase(OrderStatus.Approved)) return Color.RED;
+        if (status.equalsIgnoreCase(OrderStatus.Failed)) return Color.RED;
+        return Color.BLACK;
     }
 }

@@ -43,21 +43,26 @@ public class ProductAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
         TextView txtName;
+        TextView txtQuantity;
 
         if(convertView == null){
             convertView = activity.getLayoutInflater().inflate(R.layout.customlistview_product,null);
             txtName = convertView.findViewById(R.id.txtName);
-           
+            txtQuantity = convertView.findViewById(R.id.txtQuantity);
             imageView = convertView.findViewById(R.id.imageView);
             convertView.setTag(R.id.txtName,txtName);
+            convertView.setTag(R.id.txtQuantity,txtQuantity);
             convertView.setTag(R.id.imageView,imageView);
         }else{
             txtName = (TextView) convertView.findViewById(R.id.txtName);
+            txtQuantity = (TextView) convertView.findViewById(R.id.txtQuantity);
             imageView = (ImageView) convertView.findViewById(R.id.imageView);
 
         }
         Product product = productList.get(position);
         txtName.setText(product.getName());
+        txtQuantity.setText(String.valueOf(product.getQuantiy()));
+        System.out.println(product.getName());
         Glide.with(convertView).load(product.getImgUrl()).into(imageView);
 
    return  convertView;

@@ -51,6 +51,7 @@ public class FragmentAddProduct extends Fragment {
     private EditText txtQuantity;
     private EditText txtDescription;
     private Button btnInsert;
+    private Button btnUpload;
     private Uri imageUri;
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -104,9 +105,10 @@ public class FragmentAddProduct extends Fragment {
         txtCostOfGoodsSold = view.findViewById(R.id.txtCostOfGoodsSold);
         txtSalePrice = view.findViewById(R.id.txtSalePrice);
         txtQuantity = view.findViewById(R.id.txtQuantity);
-        btnInsert = view.findViewById(R.id.btnUpdate);
+        btnInsert = view.findViewById(R.id.btnAdd);
+        btnUpload = view.findViewById(R.id.btnUpload);
 
-        productImg.setOnClickListener(new View.OnClickListener() {
+        btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 choosePicture();

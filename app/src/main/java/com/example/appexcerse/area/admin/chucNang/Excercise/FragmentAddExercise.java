@@ -1,7 +1,6 @@
 package com.example.appexcerse.area.admin.chucNang.Excercise;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,14 +29,11 @@ import com.example.appexcerse.dao.ExerciseDAO;
 import com.example.appexcerse.model.Exercise;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -60,6 +56,7 @@ public class FragmentAddExercise extends Fragment {
     private ChipGroup chipForcusMucle;
     private ChipGroup chipTypeOfExcercise;
     private Button btnInsert;
+    private Button btnUpload;
     private EditText txtName;
     private EditText txtEquipment;
     private ImageView imgExercise;
@@ -117,6 +114,7 @@ public class FragmentAddExercise extends Fragment {
         chipForcusMucle = view.findViewById(R.id.chipMucles);
         chipTypeOfExcercise = view.findViewById(R.id.chipTypeOfExcercise);
         btnInsert = view.findViewById(R.id.btnUpdate);
+        btnUpload = view.findViewById(R.id.btnAdd);
         imgExercise = view.findViewById(R.id.imgExercise);
         spinnerLevel = view.findViewById(R.id.spinnerLevel);
         txtEquipment = view.findViewById(R.id.txtEquipment);

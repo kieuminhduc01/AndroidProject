@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/admin_gardient_background"
     tools:context=".area.admin.chucNang.Product.FragmentListProduct">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,18 +14,6 @@
         android:layout_height="match_parent"
         tools:context=".area.admin.chucNang.Product.FragmentListProduct">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="30dp"
-            android:clickable="true"
-            android:onClick="btnAddClick"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_add" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -33,14 +22,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="100dp"
                 android:orientation="vertical">
 
                 <ListView
                     android:id="@+id/listView"
-                    android:layout_width="match_parent"
-                    android:layout_height="737dp">
-
-                </ListView>
+                    android:layout_width="380dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_height="wrap_content"></ListView>
             </LinearLayout>
         </ScrollView>
 
