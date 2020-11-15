@@ -27,6 +27,8 @@
 
                 <ListView
                     android:id="@+id/listView"
+                    android:divider="@null"
+                    android:dividerHeight="0dp"
                     android:layout_width="380dp"
                     android:layout_marginLeft="15dp"
                     android:layout_height="wrap_content"></ListView>

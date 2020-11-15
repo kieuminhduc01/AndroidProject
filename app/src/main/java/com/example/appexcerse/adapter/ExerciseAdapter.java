@@ -54,6 +54,8 @@ public class ExerciseAdapter extends BaseAdapter {
             txtName = (TextView) convertView.getTag(R.id.txtName);
         }
         Exercise exercise = exerciseList.get(position);
+        txtName.setText(exercise.getName());
+
         Glide.with(convertView).load(exercise.getImgUrl()).into(imageView);
 
         return convertView;

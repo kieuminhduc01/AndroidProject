@@ -1,21 +1,31 @@
 package com.example.appexcerse.area.admin.chucNang.Shopping;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-
 import com.example.appexcerse.R;
-import com.example.appexcerse.constant.listModel.ListLevel;
 import com.example.appexcerse.constant.listModel.ListOrderStatus;
+import com.example.appexcerse.dao.OrderDAO;
 import com.example.appexcerse.model.Order;
+import com.example.appexcerse.model.OrderDetail;
+import com.example.appexcerse.model.Product;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,13 +42,16 @@ public class FragmentOrderView extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private  Order order;
+    private Order order;
     private Spinner spinnerStatus;
+    private List<Product> productList;
+    private Button btnUpdate;
 
 
     public FragmentOrderView() {
         // Required empty public constructor
     }
+
     public FragmentOrderView(Order order) {
         // Required empty public constructor
         this.order = order;
@@ -81,9 +94,21 @@ public class FragmentOrderView extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        btnUpdate = view.findViewById(R.id.btnUpdate);
         spinnerStatus = view.findViewById(R.id.spinnerStatus);
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, ListOrderStatus.getAll());
         spinnerStatus.setAdapter(spinnerAdapter);
         spinnerStatus.setSelection(spinnerAdapter.getPosition(order.getStatus()));
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference().child("Product").child(order.getId());
+        List<OrderDetail> orderDetailList = order.getItems();
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                order.setStatus(spinnerStatus.getSelectedItem().toString());
+               new OrderDAO().push(order);
+            }
+        });
+
     }
 }

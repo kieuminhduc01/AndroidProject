@@ -8,7 +8,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent"        android:background="#57C5EBED"
+
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -18,6 +19,7 @@
             android:layout_marginTop="30dp"
             app:cardBackgroundColor="#1E92EBF6"
             app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
             app:cardUseCompatPadding="true"
             app:contentPadding="16dp">
 
@@ -27,7 +29,7 @@
                 android:layout_height="150dp" />
 
             <Button
-                android:id="@+id/btnAdd"
+                android:id="@+id/btnUploadImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="200dp"
@@ -45,10 +47,12 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
+
             android:layout_marginTop="30dp"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="#1E92EBF6"
             app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
             app:cardUseCompatPadding="true"
             app:contentPadding="16dp">
 
@@ -153,8 +157,12 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             app:cardBackgroundColor="#0092EBF6"
-            app:cardCornerRadius="10dp" app:contentPadding="16dp"
-            app:cardUseCompatPadding="true">
+
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="16dp">
+
             <Button
                 android:id="@+id/btnUpdate"
                 android:layout_width="wrap_content"
@@ -165,7 +173,7 @@
                 android:text="Update" />
 
             <Button
-                android:id="@+id/btnAdd"
+                android:id="@+id/btnDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="170dp"

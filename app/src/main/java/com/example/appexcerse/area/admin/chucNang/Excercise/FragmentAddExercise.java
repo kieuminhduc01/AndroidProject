@@ -2,6 +2,7 @@ package com.example.appexcerse.area.admin.chucNang.Excercise;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,9 +12,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -56,7 +59,10 @@ public class FragmentAddExercise extends Fragment {
     private ChipGroup chipForcusMucle;
     private ChipGroup chipTypeOfExcercise;
     private Button btnInsert;
-    private Button btnUpload;
+    private Button btnUploadVideo;
+    private Button btnUploadImage;
+    private VideoView videoExercise;
+
     private EditText txtName;
     private EditText txtEquipment;
     private ImageView imgExercise;
@@ -113,13 +119,15 @@ public class FragmentAddExercise extends Fragment {
         chipMucDichTap = view.findViewById(R.id.chipMucdichtap);
         chipForcusMucle = view.findViewById(R.id.chipMucles);
         chipTypeOfExcercise = view.findViewById(R.id.chipTypeOfExcercise);
-        btnInsert = view.findViewById(R.id.btnUpdate);
-        btnUpload = view.findViewById(R.id.btnAdd);
+        btnInsert = view.findViewById(R.id.btnInsert);
         imgExercise = view.findViewById(R.id.imgExercise);
         spinnerLevel = view.findViewById(R.id.spinnerLevel);
         txtEquipment = view.findViewById(R.id.txtEquipment);
         txtCaloriesPerRep = view.findViewById(R.id.txtCalories);
-        txtVideoUrl = view.findViewById(R.id.txtVideoUrl);
+
+        btnUploadVideo = view.findViewById(R.id.btnUploadVideo);
+        btnUploadImage = view.findViewById(R.id.btnUploadImage);
+        videoExercise = view.findViewById(R.id.videoExercise);
         txtName = view.findViewById(R.id.txtName);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -146,14 +154,14 @@ public class FragmentAddExercise extends Fragment {
             }
         });
 
-        imgExercise.setOnClickListener(new View.OnClickListener() {
+        btnUploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
               choosePicture();
             }
         });
 
-        txtVideoUrl.setOnClickListener(new View.OnClickListener() {
+        btnUploadVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                chooseVideo();
@@ -227,8 +235,9 @@ public class FragmentAddExercise extends Fragment {
                         imgUrl.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                               txtVideoUrl.setText("Click here to change video");
+
                                exercise.setVideoUrl(uri.toString());
+                               playVideo();
                             }
                         });
                         Toast.makeText(getContext(),"Uploaded",Toast.LENGTH_SHORT).show();
@@ -242,6 +251,19 @@ public class FragmentAddExercise extends Fragment {
                 });
     }
 
+
+    private void playVideo() {
+        videoExercise.setVideoURI(Uri.parse(exercise.getVideoUrl()));
+        MediaController mediaController = new MediaController(getContext());
+        mediaController.setAnchorView(videoExercise);
+        videoExercise.setMediaController(mediaController);
+        videoExercise.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                videoExercise.start();
+            }
+        });
+    }
 
 
 

@@ -1,132 +1,318 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".area.admin.chucNang.Excercise.FragmentAddExercise">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/frameLayout5"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".area.admin.chucNang.Excercise.FragmentAddExercise">
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipMucdichtap"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtName">
+    android:orientation="vertical">
 
-    </com.google.android.material.chip.ChipGroup>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#57C5EBED"
 
-    <ImageView
-        android:id="@+id/imgExercise"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="4dp"
-        android:src="@drawable/admin_order_icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/txtName"
-        android:layout_width="320dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgExercise" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="350dp"
+            android:layout_height="160dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            app:cardBackgroundColor="#1E92EBF6"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="16dp">
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipMucles"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chipMucdichtap">
+            <ImageView
+                android:id="@+id/imgExercise"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/admin_order_icon" />
 
-    </com.google.android.material.chip.ChipGroup>
+            <Button
+                android:id="@+id/btnUploadImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="200dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/buttonshape"
+                android:text="Upload Image"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
-    <Spinner
-        android:id="@+id/spinnerLevel"
-        android:layout_width="320dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chipMucles" />
+        </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/txtVideoUrl"
-        android:layout_width="320dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="20dp"
-        android:text="Click here to choose video"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerLevel" />
 
-    <EditText
-        android:id="@+id/txtEquipment"
-        android:layout_width="320dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Equiment Needed"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtVideoUrl" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="#1E92EBF6"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="16dp">
 
-    <Button
-        android:id="@+id/btnUpdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:layout_marginLeft="136dp"
-        android:layout_marginTop="152dp"
-        android:text="Insert"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEquipment" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/txtCalories"
-        android:layout_width="320dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="12dp"
-        android:ems="10"
-        android:hint="Calories Per Rep"
-        android:inputType="numberDecimal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEquipment" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#FF8A99AF">
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipTypeOfExcercise"
-        android:layout_width="320dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCalories">
+                    <EditText
+                        android:id="@+id/txtName"
+                        android:layout_width="306dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="0dp"
+                        android:ems="10"
+                        android:fontFamily="@font/calibri"
+                        android:hint="Name"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-    </com.google.android.material.chip.ChipGroup>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#FF8A99AF">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#FF8A99AF">
+
+                    <EditText
+                        android:id="@+id/txtEquipment"
+                        android:layout_width="306dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="0dp"
+                        android:ems="10"
+                        android:fontFamily="@font/calibri"
+                        android:hint="Equipment"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#FF8A99AF">
+
+                    <EditText
+                        android:id="@+id/txtCalories"
+                        android:layout_width="320dp"
+                        android:layout_height="40dp"
+                        android:ems="10"
+                        android:hint="Calories Per Rep"
+                        android:inputType="numberDecimal" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            app:cardBackgroundColor="#1E92EBF6"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="306dp"
+                    android:layout_height="wrap_content"
+                    android:text="Difficulity"
+                    android:textColor="#000000" />
+
+                <Spinner
+                    android:id="@+id/spinnerLevel"
+                    android:layout_width="320dp"
+                    android:layout_height="40dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="350dp"
+            android:layout_height="160dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            app:cardBackgroundColor="#1E92EBF6"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="16dp">
+
+            <VideoView
+                android:id="@+id/videoExercise"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp" />
+
+            <Button
+                android:id="@+id/btnUploadVideo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="200dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/buttonshape"
+                android:text="Upload Image"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            app:cardBackgroundColor="#1E92EBF6"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="306dp"
+                    android:layout_height="wrap_content"
+                    android:text="Forcus Mucles"
+                    android:textColor="#000000" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipMucles"
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            app:cardBackgroundColor="#1E92EBF6"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="306dp"
+                    android:layout_height="wrap_content"
+                    android:text="Type Of Exercise"
+                    android:textColor="#000000" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipTypeOfExcercise"
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            app:cardBackgroundColor="#1E92EBF6"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="306dp"
+                    android:layout_height="wrap_content"
+                    android:text="Trainning Objectives"
+                    android:textColor="#000000" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipMucdichtap"
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:background="#57C5EBED"
+            app:cardBackgroundColor="#0092EBF6"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="10dp">
+
+
+            <Button
+                android:id="@+id/btnInsert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:text="Add" />
+
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
 </ScrollView>

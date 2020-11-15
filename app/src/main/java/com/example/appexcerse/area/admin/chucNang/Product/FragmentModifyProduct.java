@@ -111,9 +111,9 @@ public class FragmentModifyProduct extends Fragment {
         txtCostOfGoodsSold = view.findViewById(R.id.txtCostOfGoodsSold);
         txtSalePrice = view.findViewById(R.id.txtSalePrice);
         txtQuantity = view.findViewById(R.id.txtQuantity);
-        btnDelete = view.findViewById(R.id.btnAdd);
+        btnDelete = view.findViewById(R.id.btnDelete);
         btnUpdate = view.findViewById(R.id.btnUpdate);
-        btnUploadImage = view.findViewById(R.id.btnAdd);
+        btnUploadImage = view.findViewById(R.id.btnUploadImage);
 
         txtName.setText(curentProduct.getName());
         txtCostOfGoodsSold.setText(String.valueOf(curentProduct.getCostOfGoodSold()));
