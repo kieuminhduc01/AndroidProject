@@ -139,6 +139,11 @@ public class FragmentModifyProduct extends Fragment {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                curentProduct.setQuantiy(Integer.valueOf(txtQuantity.getText().toString()));
+                curentProduct.setCostOfGoodSold(Float.valueOf(txtCostOfGoodsSold.getText().toString()));
+                curentProduct.setDescriptionl(txtDescription.getText().toString());
+                curentProduct.setName(txtName.getText().toString());
+                curentProduct.setSalePrice(Float.valueOf(txtSalePrice.getText().toString()));
                 new ProductDAO().push(curentProduct);
             }
         });

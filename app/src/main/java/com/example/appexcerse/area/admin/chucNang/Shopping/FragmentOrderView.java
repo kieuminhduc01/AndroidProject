@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -13,18 +15,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.appexcerse.R;
+import com.example.appexcerse.adapter.ProductAdapter;
 import com.example.appexcerse.constant.listModel.ListOrderStatus;
 import com.example.appexcerse.dao.OrderDAO;
 import com.example.appexcerse.model.Order;
-import com.example.appexcerse.model.OrderDetail;
 import com.example.appexcerse.model.Product;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,6 +44,13 @@ public class FragmentOrderView extends Fragment {
     private Spinner spinnerStatus;
     private List<Product> productList;
     private Button btnUpdate;
+    private EditText txtCustomerId;
+    private EditText txtId;
+    private EditText txtCreatedDate;
+    private EditText txtDeliverDate;
+    private EditText txtTotalAmount;
+
+    private ListView listView;
 
 
     public FragmentOrderView() {
@@ -96,12 +101,25 @@ public class FragmentOrderView extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         btnUpdate = view.findViewById(R.id.btnUpdate);
         spinnerStatus = view.findViewById(R.id.spinnerStatus);
+        txtCreatedDate = view.findViewById(R.id.txtCreatedDate);
+        txtDeliverDate = view.findViewById(R.id.txtDeliverDate);
+        txtTotalAmount = view.findViewById(R.id.txtTotalAmount);
+        txtCustomerId = view.findViewById(R.id.txtCustomerId);
+        listView = view.findViewById(R.id.listView);
+        txtId = view.findViewById(R.id.txtId);
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, ListOrderStatus.getAll());
         spinnerStatus.setAdapter(spinnerAdapter);
         spinnerStatus.setSelection(spinnerAdapter.getPosition(order.getStatus()));
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference().child("Product").child(order.getId());
-        List<OrderDetail> orderDetailList = order.getItems();
+        txtId.setText(order.getId());
+        txtCustomerId.setText(order.getCustomerId());
+        txtCreatedDate.setText(order.getCreatedDate());
+        txtDeliverDate.setText(order.getDeliveredDate());
+        txtTotalAmount.setText(String.valueOf(order.getTotalAmount()));
+
+        ProductAdapter adapter = new ProductAdapter(getActivity(), R.layout.customlistview_product, order.getItems());
+        listView.setAdapter(adapter);
+
+
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

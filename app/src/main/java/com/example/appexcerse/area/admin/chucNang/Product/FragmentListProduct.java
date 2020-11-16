@@ -18,6 +18,10 @@ import com.example.appexcerse.R;
 import com.example.appexcerse.adapter.ProductAdapter;
 import com.example.appexcerse.adapter.UserAdapter;
 import com.example.appexcerse.area.admin.chucNang.User.FragmentModifyUser;
+import com.example.appexcerse.area.admin.logicUtil.Util;
+import com.example.appexcerse.constant.model.OrderStatus;
+import com.example.appexcerse.dao.OrderDAO;
+import com.example.appexcerse.model.Order;
 import com.example.appexcerse.model.Product;
 import com.example.appexcerse.model.User;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -98,6 +103,8 @@ public class FragmentListProduct extends Fragment {
                 for (DataSnapshot data : snapshot.getChildren()) {
                     productList.add(data.getValue(Product.class));
                 }
+
+
 
                 adapter = new ProductAdapter(getActivity(),R.layout.customlistview_admin_user_list,productList);
                 listView.setAdapter(adapter);

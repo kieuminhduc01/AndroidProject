@@ -1,6 +1,5 @@
 package com.example.appexcerse.model;
 
-import java.util.Date;
 import java.util.List;
 
 public class Order {
@@ -10,11 +9,7 @@ public class Order {
     private Double totalAmount;
     private String Status;
     private String DeliveredDate;
-    private List<OrderDetail> items;
-
-    public Order() {
-    }
-
+    private List<Product> items;
 
     public String getId() {
         return id;
@@ -64,15 +59,18 @@ public class Order {
         DeliveredDate = deliveredDate;
     }
 
-    public List<OrderDetail> getItems() {
+    public List<Product> getItems() {
         return items;
     }
 
-    public void setItems(List<OrderDetail> items) {
+    public void setItems(List<Product> items) {
         this.items = items;
     }
 
-    public Order(String customerId, String createdDate, Double totalAmount, String status, String deliveredDate, List<OrderDetail> items) {
+    public Order() {
+    }
+
+    public Order(String customerId, String createdDate, Double totalAmount, String status, String deliveredDate, List<Product> items) {
         this.customerId = customerId;
         this.createdDate = createdDate;
         this.totalAmount = totalAmount;
