@@ -157,6 +157,7 @@ public class FragmentModifyExcersice extends Fragment {
             @Override
             public void onClick(View v) {
                 new ExerciseDAO().delete(currentExercise.getId());
+                getFragmentManager().popBackStack();
             }
         });
         btnUpdate.setOnClickListener(new View.OnClickListener() {

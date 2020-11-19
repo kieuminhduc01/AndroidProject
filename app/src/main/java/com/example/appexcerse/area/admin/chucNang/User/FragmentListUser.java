@@ -102,7 +102,6 @@ public class FragmentListUser extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     userList.add(snapshot.getValue(User.class));
                 }
-
                 adapter = new UserAdapter(getActivity(), R.layout.customlistview_admin_user_list, userList);
                 listView.setAdapter(adapter);
                 Activity currentActivity = getActivity();
@@ -116,7 +115,6 @@ public class FragmentListUser extends Fragment {
                         transaction.addToBackStack(null);
                     }
                 });
-
             }
 
             @Override

@@ -183,13 +183,13 @@ public class FragmentModifyProduct extends Fragment {
                                 productImg.setImageURI(imageUri);
                             }
                         });
-                        FancyToast.makeText(getContext(),"Upload Successful",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,true).show();
+                        FancyToast.makeText(getContext(),"Upload Successful",FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
-                        FancyToast.makeText(getContext(),"Failed",FancyToast.LENGTH_SHORT,FancyToast.ERROR,true).show();
+                        FancyToast.makeText(getContext(),"Failed",FancyToast.LENGTH_SHORT,FancyToast.ERROR,false).show();
                     }
                 });
     }

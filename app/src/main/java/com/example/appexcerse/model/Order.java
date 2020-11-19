@@ -6,7 +6,7 @@ public class Order {
     private String id;
     private String customerId;
     private String createdDate;
-    private Double totalAmount;
+    private String totalAmount;
     private String Status;
     private String DeliveredDate;
     private List<Product> items;
@@ -35,11 +35,11 @@ public class Order {
         this.createdDate = createdDate;
     }
 
-    public Double getTotalAmount() {
+    public String getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(Double totalAmount) {
+    public void setTotalAmount(String totalAmount) {
         this.totalAmount = totalAmount;
     }
 
@@ -70,7 +70,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(String customerId, String createdDate, Double totalAmount, String status, String deliveredDate, List<Product> items) {
+    public Order(String customerId, String createdDate, String totalAmount, String status, String deliveredDate, List<Product> items) {
         this.customerId = customerId;
         this.createdDate = createdDate;
         this.totalAmount = totalAmount;

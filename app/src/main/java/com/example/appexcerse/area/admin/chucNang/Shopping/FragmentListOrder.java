@@ -98,7 +98,7 @@ public class FragmentListOrder extends Fragment {
                 orderList = new ArrayList<>();
                 for (DataSnapshot data : snapshot.getChildren()) {
                     orderList.add(data.getValue(Order.class));
-                    System.out.println("AHihi-1");
+
                 }
                 adapter = new OrderAdapter(getActivity(),R.layout.customlistview_order,orderList);
                 listView.setAdapter(adapter);

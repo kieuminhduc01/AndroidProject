@@ -2,24 +2,20 @@ package com.example.appexcerse.area.admin.chucNang.Excercise;
 
 import android.app.Activity;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.appexcerse.R;
 import com.example.appexcerse.adapter.ExerciseAdapter;
-import com.example.appexcerse.adapter.ProductAdapter;
-import com.example.appexcerse.area.admin.chucNang.Product.FragmentModifyProduct;
 import com.example.appexcerse.model.Exercise;
-import com.example.appexcerse.model.Product;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,7 +42,8 @@ public class FragmentListExercise extends Fragment {
     private String mParam2;
     private ListView listView;
     private List<Exercise> exerciseList;
-private ExerciseAdapter adapter;
+    private ExerciseAdapter adapter;
+
     public FragmentListExercise() {
         // Required empty public constructor
     }
@@ -98,9 +95,9 @@ private ExerciseAdapter adapter;
                 for (DataSnapshot data : snapshot.getChildren()) {
                     exerciseList.add(data.getValue(Exercise.class));
                 }
-                adapter = new ExerciseAdapter(getActivity(),R.layout.customlistview_exercise,exerciseList);
+                adapter = new ExerciseAdapter(getActivity(), R.layout.customlistview_exercise, exerciseList);
                 listView.setAdapter(adapter);
-                Activity currentActivity =  getActivity();
+                Activity currentActivity = getActivity();
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
