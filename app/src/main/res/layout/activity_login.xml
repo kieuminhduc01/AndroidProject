@@ -81,6 +81,7 @@
                 android:textColorHint="#FF8A99AF">
 
                 <EditText
+
                     android:id="@+id/txtPassword"
                     android:layout_width="306dp"
                     android:layout_height="wrap_content"
@@ -88,7 +89,7 @@
                     android:fontFamily="@font/calibri"
                     android:hint="Password"
 
-                    android:inputType="textPersonName" />
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.cardview.widget.CardView>
 

@@ -25,6 +25,13 @@
                 android:text="Admin Dashboard"
                 android:textColor="#000000"
                 android:textSize="22sp" />
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="350dp"
+                android:src="@drawable/logout_logo"
+                android:onClick="onLogoutClick"
+                />
 
 
         </RelativeLayout>

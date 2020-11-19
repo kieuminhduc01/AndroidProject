@@ -35,4 +35,8 @@ public class AdminDashBoardActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onLogoutClick(View view) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
 }
